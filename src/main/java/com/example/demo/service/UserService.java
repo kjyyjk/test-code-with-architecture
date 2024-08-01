@@ -48,7 +48,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserEntity update    (long id, UserUpdateDto userUpdateDto) {
+    public UserEntity update(long id, UserUpdateDto userUpdateDto) {
         UserEntity userEntity = getById(id);
         userEntity.setNickname(userUpdateDto.getNickname());
         userEntity.setAddress(userUpdateDto.getAddress());

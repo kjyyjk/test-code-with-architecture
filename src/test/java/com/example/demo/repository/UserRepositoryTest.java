@@ -37,8 +37,6 @@ class UserRepositoryTest {
     @Test
     void findByIdAndStatus_로_유저데이터를_찾아올수있따() {
         //given
-
-
         //when
         Optional<UserEntity> result = userRepository.findByIdAndStatus(1L, UserStatus.ACTIVE);
 
@@ -49,8 +47,6 @@ class UserRepositoryTest {
     @Test
     void findByIdAndStatus_는_데이터가_없으면_Optional_empty를내려준다() {
         //given
-
-
         //when
         Optional<UserEntity> result = userRepository.findByIdAndStatus(1L, UserStatus.PENDING);
 
@@ -62,8 +58,6 @@ class UserRepositoryTest {
     @Test
     void findByEmailAndStatus_로_유저데이터를_찾아올수있따() {
         //given
-
-
         //when
         Optional<UserEntity> result = userRepository.findByEmailAndStatus("rlawnsdud920@naver.com", UserStatus.ACTIVE);
 
@@ -74,8 +68,6 @@ class UserRepositoryTest {
     @Test
     void findByEmailAndStatus_는_데이터가_없으면_Optional_empty를내려준다() {
         //given
-
-
         //when
         Optional<UserEntity> result = userRepository.findByEmailAndStatus("rlawnsdud920@naver.com", UserStatus.PENDING);
 
