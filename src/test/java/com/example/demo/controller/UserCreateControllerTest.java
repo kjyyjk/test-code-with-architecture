@@ -1,11 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.dto.UserCreateDto;
-import com.example.demo.model.dto.UserUpdateDto;
+import com.example.demo.user.domain.dto.UserCreate;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -42,7 +39,7 @@ class UserCreateControllerTest {
     @Test
     public void  사용자는_회원가입을_할_수_있고_사용자는_PENDING_상태이다() throws Exception {
         //given
-        UserCreateDto userCreateDto = UserCreateDto.builder()
+        UserCreate userCreate = UserCreate.builder()
                 .email("rlawnsdud920@naver.com")
                 .nickname("kkkk")
                 .address("busan")
@@ -53,7 +50,7 @@ class UserCreateControllerTest {
         //then
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userCreateDto)))
+                        .content(objectMapper.writeValueAsString(userCreate)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.email").value("rlawnsdud920@naver.com"))
