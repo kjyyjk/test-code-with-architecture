@@ -73,6 +73,17 @@ class UserControllerTest {
         UserEntity userEntity = userRepository.findById(12L).get();
         assertThat(userEntity.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
+    
+    @Test
+    public void 사용자는_인증코드가_일치하지_않을_경우_권한없음_에러를_내려준다() throws Exception {
+        //given
+        //when
+        //then
+        mockMvc.perform(get("/api/users/12/verify")
+                        .queryParam("certificationCode", "aaaa-aaaaaa-aaaaa123"))
+                .andExpect(status().isForbidden())
+                .andExpect(content().string("자격 증명에 실패하였습니다."));
+    }
 
     @Test
     public void 사용자는_내_정보를_불러올_때_개인정보인_주소도_갖고올_수_있다() throws Exception {
