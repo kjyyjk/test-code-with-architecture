@@ -12,18 +12,8 @@ import com.example.demo.user.domain.dto.UserCreate;
 import com.example.demo.user.domain.dto.UserUpdate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlGroup;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.BDDMockito.any;
-import static org.mockito.BDDMockito.doNothing;
 
 class UserServiceTest {
 
@@ -52,7 +42,7 @@ class UserServiceTest {
                         .lastLoginAt(0L).build());
 
         fakeUserRepository.save(User.builder()
-                        .id(22L)
+                        .id(12L)
                         .email("rlawnsdud921@naver.com")
                         .nickname("kjyyjk")
                         .address("seoul")

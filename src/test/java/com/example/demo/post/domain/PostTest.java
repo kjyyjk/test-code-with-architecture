@@ -1,17 +1,18 @@
 package com.example.demo.post.domain;
 
+import com.example.demo.mock.TestClockHolder;
 import com.example.demo.post.domain.dto.PostCreate;
+import com.example.demo.post.domain.dto.PostUpdate;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PostTest {
+
+    private final TestClockHolder testClockHolder = new TestClockHolder(100L);
 
     @Test
     public void Post는_PostCreate로_만들_수_있다() {
@@ -30,7 +31,7 @@ class PostTest {
                 .build();
 
         //when
-        Post post = Post.from(writer, postCreate);
+        Post post = Post.from(writer, postCreate, testClockHolder);
 
         //then
         assertThat(post.getContent()).isEqualTo("hello world");
@@ -39,6 +40,38 @@ class PostTest {
         assertThat(post.getWriter().getAddress()).isEqualTo("seoul");
         assertThat(post.getWriter().getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(post.getWriter().getCertificationCode()).isEqualTo("aaaa-aaaaaa-aaaaaa");
+        assertThat(post.getCreatedAt()).isEqualTo(100L);
+    }
+    
+    @Test
+    public void Post는_PostUpdate로_수정할_수_있다() {
+        //given
+        PostUpdate postUpdate = PostUpdate.builder()
+                .content("foobar")
+                .build();
+
+        User user = User.builder()
+                .email("rlawnsdud920@naver.com")
+                .nickname("kjyyjk")
+                .address("seoul")
+                .certificationCode("aaaa-aaaaaa-aaaaaa")
+                .status(UserStatus.ACTIVE)
+                .build();
+
+        Post post = Post.builder()
+                .id(11L)
+                .writer(user)
+                .createdAt(1678530673958L)
+                .modifiedAt(1678530673958L)
+                .content("helloworld")
+                .build();
+
+        //when
+        post = post.update(postUpdate, testClockHolder);
+
+        //then
+        assertThat(post.getContent()).isEqualTo("foobar");
+        assertThat(post.getModifiedAt()).isEqualTo(100L);
     }
 
 }
