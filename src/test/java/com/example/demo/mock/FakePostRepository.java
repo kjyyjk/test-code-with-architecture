@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class FakePostRepository implements PostRepository {
 
-    private final Long id = 11L;
+    private final Long id = 0L;
     private final List<Post> data = new ArrayList<>();
 
     @Override

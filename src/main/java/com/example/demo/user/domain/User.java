@@ -9,9 +9,6 @@ import com.example.demo.user.domain.dto.UserUpdate;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.Clock;
-import java.util.UUID;
-
 @Getter
 public class User {
 
