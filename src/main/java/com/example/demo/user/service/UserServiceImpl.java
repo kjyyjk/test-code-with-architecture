@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Builder
-public class UserServiceImpl implements UserCreateService, UserReadService, UserUpdateService, AuthenticationService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final CertificationService certificationService;
+    private final CertificationService certificationServiceImpl;
     private final UUIDHolder uuidHolder;
     private final ClockHolder clockHolder;
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserCreateService, UserReadService, User
     public User create(UserCreate userCreate) {
         User user = User.from(userCreate, uuidHolder);
         user = userRepository.save(user);
-        certificationService.send(user.getEmail(), user.getId(), user.getCertificationCode());
+        certificationServiceImpl.send(user.getEmail(), user.getId(), user.getCertificationCode());
         return user;
     }
 
